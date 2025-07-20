@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #e3f2fd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .bmi-container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 320px;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #bmiResult {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="bmi-container">
+    <h2>BMI Calculator</h2>
+    <input type="number" id="weight" placeholder="Weight in kg">
+    <input type="number" id="height" placeholder="Height in meters">
+    <button onclick="calculateBMI()">Calculate BMI</button>
+    <p id="bmiResult"></p>
+  </div>
+  <script>
+    function calculateBMI() {
+      const weight = parseFloat(document.getElementById('weight').value);
+      const height = parseFloat(document.getElementById('height').value);
+      const result = document.getElementById('bmiResult');
+
+      if (!weight || !height) {
+        result.textContent = 'Please enter valid weight and height.';
+        result.style.color = 'red';
+        return;
+      }
+
+      const bmi = weight / (height * height);
+      let message = `Your BMI is ${bmi.toFixed(2)}. `;
+
+      if (bmi < 18.5) {
+        message += 'You are underweight.';
+      } else if (bmi < 24.9) {
+        message += 'You are in the normal weight range.';
+      } else if (bmi < 29.9) {
+        message += 'You are overweight.';
+      } else {
+        message += 'You are obese.';
+      }
+
+      result.textContent = message;
+      result.style.color = 'green';
+    }
+  </script>
+</body>
+</html>
